@@ -7,6 +7,7 @@ package controlador;
 import java.util.ArrayList;
 import modelo.Empleado;
 import utilidades.Utilidades;
+import utilidades.Utilidades.NombreAleatorio;
 
 
 public class Planilla {
@@ -22,7 +23,7 @@ public class Planilla {
     public void inicializarDatos() {
         for (int i = 0; i < empleados.length; i++) {
             String dniEmpleado = Utilidades.generarDniAleatorio();
-            String nombreEmpleado = Utilidades.generarNombreAleatorio();
+            String nombreEmpleado = NombreAleatorio.generarNombreAleatorio();
             int edadEmpleado = Utilidades.generarEdadAleatoria();
             double sueldoBasico = Utilidades.generarSueldoBasicoAleatorio();
             String seguro = Utilidades.generarSeguroAleatorio();

@@ -5,6 +5,8 @@
 package utilidades;
 
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utilidades {
     private static final Random RANDOM = new Random();
@@ -18,16 +20,36 @@ public class Utilidades {
         int dni = 10000000 + RANDOM.nextInt(90000000); // Genera un número entre 10000000 y 99999999
         return String.valueOf(dni);
     }
-
     /**
      * Genera un nombre aleatorio a partir de una lista predefinida.
      *
-     * @return Nombre generado aleatoriamente.
      */
-    public static String generarNombreAleatorio() {
-        String[] nombres = {"Marcelo", "Fabiana","Giussepe", "Marco", "Aaron", "Bruno", "Carlos", "Ana", "Luis", "Maria", "Jose", "Lucia", "Pedro", "Carmen"};
-        return nombres[RANDOM.nextInt(nombres.length)];
+    public class NombreAleatorio {
+
+        private static final Random RANDOM = new Random();
+        private static final List<String> nombresDisponibles = new ArrayList<>(List.of(
+                "Carlos", "Maria", "Giussepe", "Ana", "Luis", "Sofia", "Pedro", "Lucia",
+                "Miguel", "Clara", "Javier", "Valeria", "Andres", "Camila", "Ricardo",
+                "Daniela", "Felipe", "Mariana", "Diego", "Alejandra", "Aaron", "Bruno"
+        ));
+        private static final List<String> apellidosDisponibles = new ArrayList<>(List.of(
+                "Garcia", "Martinez", "Rodriguez", "Lopez", "Gonzalez", "Perez",
+                "Fernandez", "Chavez", "Vargas", "Rojas", "Torres", "Castro",
+                "Flores", "Reyes", "Herrera", "Ramos", "Romero", "Cruz",
+                "Morales", "Ortega", "Delgado", "Yovera"
+        ));
+
+        public static String generarNombreAleatorio() {
+            String nombre = nombresDisponibles.get(RANDOM.nextInt(nombresDisponibles.size()));
+            String apellido = apellidosDisponibles.get(RANDOM.nextInt(apellidosDisponibles.size()));
+            return nombre + " " + apellido;
+        }
+
+        public static void main(String[] args) {
+            System.out.println(generarNombreAleatorio());
+        }
     }
+
 
     /**
      * Devuelve una edad aleatoria entre 18 y 60.
