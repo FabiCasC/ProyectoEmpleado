@@ -25,7 +25,7 @@ public class Utilidades {
      * @return Nombre generado aleatoriamente.
      */
     public static String generarNombreAleatorio() {
-        String[] nombres = {"Marcelo", "Fabiana", "Carlos", "Ana", "Luis", "Maria", "Jose", "Lucia", "Pedro", "Carmen"};
+        String[] nombres = {"Marcelo", "Fabiana","Giussepe", "Marco", "Aaron", "Bruno", "Carlos", "Ana", "Luis", "Maria", "Jose", "Lucia", "Pedro", "Carmen"};
         return nombres[RANDOM.nextInt(nombres.length)];
     }
 

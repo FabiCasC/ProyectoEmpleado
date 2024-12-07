@@ -169,24 +169,38 @@ public class InterfazGrafica extends Frame {
     // Muestra los resultados en formato de tabla
     private void mostrarResultados(ArrayList<Empleado> empleados) {
         StringBuilder sb = new StringBuilder();
-        
+
         // Encabezado de la tabla
-        sb.append("┌───────────────┬───────────────────────────┬─────┬─────────────────┬──────────┬─────────────────┬──────────┬─────────────────┐\n");
-        sb.append(String.format("│ %-13s │ %-25s │ %-3s │ %-15s │ %-8s │ %-15s │ %-8s │ %-15s │\n",
+        sb.append("┌───────────────┬───────────────────────────┬──────┬──────────────────┬───────────┬──────────────────┬───────────┬──────────────────┐\n");
+        sb.append(String.format("│ %-13s │ %-25s │ %-4s │ %-16s │ %-9s │ %-16s │ %-9s │ %-16s │\n",
                 "DNI", "Nombre", "Edad", "Sueldo Inicial", "Seguro", "Horas Extras", "Tardanzas", "Sueldo Final"));
-        sb.append("├───────────────┼───────────────────────────┼─────┼─────────────────┼──────────┼─────────────────┼──────────┼─────────────────┤\n");
+        sb.append("├───────────────┼───────────────────────────┼──────┼──────────────────┼───────────┼──────────────────┼───────────┼──────────────────┤\n");
 
         // Datos de los empleados
         for (Empleado emp : empleados) {
-            sb.append(String.format("│ %-13s │ %-25s │ %-3d │ %-15.2f │ %-8s │ %-15d │ %-8d │ %-15.2f │\n",
-                    emp.getDni(), emp.getNombreCompleto(), emp.getEdad(), emp.getSueldoBasico(),
-                    emp.getSeguro(), emp.getHorasExtras(), emp.getTardanzas(), emp.getSueldoFinal()));
+            String dni = truncate(emp.getDni(), 13);
+            String nombre = truncate(emp.getNombreCompleto(), 25);
+            String seguro = truncate(emp.getSeguro(), 9);
+
+            sb.append(String.format("│ %-13s │ %-25s │ %-4d │ %-16.2f │ %-9s │ %-16d │ %-9d │ %-16.2f │\n",
+                    dni, nombre, emp.getEdad(), emp.getSueldoBasico(),
+                    seguro, emp.getHorasExtras(), emp.getTardanzas(), emp.getSueldoFinal()));
         }
 
         // Pie de la tabla
-        sb.append("└───────────────┴───────────────────────────┴─────┴─────────────────┴──────────┴─────────────────┴──────────┴─────────────────┘\n");
+        sb.append("└───────────────┴───────────────────────────┴──────┴──────────────────┴───────────┴──────────────────┴───────────┴──────────────────┘\n");
 
+        // Mostrar la tabla
+        areaResultados.setFont(new Font("Monospaced", Font.PLAIN, 12));
         areaResultados.setText(sb.toString());
+    }
+
+    // Método auxiliar para truncar cadenas
+    private String truncate(String text, int maxLength) {
+        if (text.length() > maxLength) {
+            return text.substring(0, maxLength - 1) + "…";
+        }
+        return text;
     }
 
     public static void main(String[] args) {
