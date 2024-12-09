@@ -20,36 +20,6 @@ public class Utilidades {
         int dni = 10000000 + RANDOM.nextInt(90000000); // Genera un número entre 10000000 y 99999999
         return String.valueOf(dni);
     }
-    /**
-     * Genera un nombre aleatorio a partir de una lista predefinida.
-     *
-     */
-    public class NombreAleatorio {
-
-        private static final Random RANDOM = new Random();
-        private static final List<String> nombresDisponibles = new ArrayList<>(List.of(
-                "Carlos", "Maria", "Giussepe", "Ana", "Luis", "Sofia", "Pedro", "Lucia",
-                "Miguel", "Clara", "Javier", "Valeria", "Andres", "Camila", "Ricardo",
-                "Daniela", "Felipe", "Mariana", "Diego", "Alejandra", "Aaron", "Bruno"
-        ));
-        private static final List<String> apellidosDisponibles = new ArrayList<>(List.of(
-                "Garcia", "Martinez", "Rodriguez", "Lopez", "Gonzalez", "Perez",
-                "Fernandez", "Chavez", "Vargas", "Rojas", "Torres", "Castro",
-                "Flores", "Reyes", "Herrera", "Ramos", "Romero", "Cruz",
-                "Morales", "Ortega", "Delgado", "Yovera"
-        ));
-
-        public static String generarNombreAleatorio() {
-            String nombre = nombresDisponibles.get(RANDOM.nextInt(nombresDisponibles.size()));
-            String apellido = apellidosDisponibles.get(RANDOM.nextInt(apellidosDisponibles.size()));
-            return nombre + " " + apellido;
-        }
-
-        public static void main(String[] args) {
-            System.out.println(generarNombreAleatorio());
-        }
-    }
-
 
     /**
      * Devuelve una edad aleatoria entre 18 y 60.
@@ -104,5 +74,41 @@ public class Utilidades {
      */
     public static double formatearDouble(double valor) {
         return Math.round(valor * 100.0) / 100.0;
+    }
+
+    /**
+     * Clase para generar nombres aleatorios únicos.
+     */
+    public static class NombreAleatorio {
+        private static final Random RANDOM = new Random();
+        private static final List<String> nombresDisponibles = new ArrayList<>(List.of(
+                "Carlos", "Maria", "Giussepe", "Ana", "Luis", "Sofia", "Pedro", "Lucia",
+                "Miguel", "Clara", "Javier", "Valeria", "Andres", "Camila", "Ricardo",
+                "Daniela", "Felipe", "Mariana", "Diego", "Alejandra", "Aaron", "Bruno"
+        ));
+        private static final List<String> apellidosDisponibles = new ArrayList<>(List.of(
+                "Garcia", "Martinez", "Rodriguez", "Lopez", "Gonzalez", "Perez",
+                "Fernandez", "Chavez", "Vargas", "Rojas", "Torres", "Castro",
+                "Flores", "Reyes", "Herrera", "Ramos", "Romero", "Cruz",
+                "Morales", "Ortega", "Delgado", "Yovera"
+        ));
+
+        /**
+         * Genera un nombre aleatorio único.
+         *
+         * @return Nombre generado aleatoriamente.
+         */
+        public static String generarNombreAleatorio() {
+            // Verificar que hay nombres y apellidos disponibles
+            if (nombresDisponibles.isEmpty() || apellidosDisponibles.isEmpty()) {
+                throw new IllegalStateException("No quedan más nombres o apellidos disponibles.");
+            }
+
+            // Elegir un nombre y un apellido aleatorio
+            String nombre = nombresDisponibles.remove(RANDOM.nextInt(nombresDisponibles.size()));
+            String apellido = apellidosDisponibles.remove(RANDOM.nextInt(apellidosDisponibles.size()));
+
+            return nombre + " " + apellido;
+        }
     }
 }
